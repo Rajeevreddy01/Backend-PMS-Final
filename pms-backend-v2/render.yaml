@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: pms-backend
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    # GET /api/health returns 200 with no auth required
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: PGHOST
+        value: REPLACE_WITH_INTERNAL_HOST
+      - key: PGPORT
+        value: "5432"
+      - key: PGDATABASE
+        value: REPLACE_WITH_DB_NAME
+      - key: PGUSER
+        value: REPLACE_WITH_DB_USER
+      - key: PGPASSWORD
+        value: REPLACE_WITH_DB_PASSWORD
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRATION
+        value: "86400000"
+      - key: FRONTEND_URL
+        value: https://pms-frontend.onrender.com
